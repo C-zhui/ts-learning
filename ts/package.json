@@ -1,0 +1,19 @@
+{
+  "name": "ramda-code",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean":"rm ./dest/*",
+    "watch-ts":"tsc --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ramda": "^0.26.1"
+  },
+  "devDependencies": {
+    "@types/ramda": "^0.26.8",
+    "typescript": "^3.4.5"
+  }
+}
