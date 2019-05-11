@@ -1,3 +1,4 @@
+"use strict";
 // var counter ; // any type
 // var counter = 0; // number , detected
 // 1. number
@@ -47,16 +48,13 @@ var notChange = 3;
 // notChange = 4; // 报错
 for (var i = 0; i < 10; i++) {
     setTimeout(function () {
-        console.log(i);
+        // console.log(i) 
     }, 200);
 }
-var _loop_1 = function (j) {
-    setTimeout(function () {
-        console.log(j);
-    }, 200);
-};
 for (var j = 0; j < 10; j++) {
-    _loop_1(j);
+    setTimeout(function () {
+        // console.log(j)
+    }, 200);
 }
 // 10. 联合类型
 var path;
@@ -69,7 +67,6 @@ if (typeof x == 'string') { // 这{} 中的x会被编译器认为是string类型
     var list_1 = x.split('');
     // let nothing = x.splice(1,3) // 这句报错
 }
-x.foo(); // 因为是any，所以没问题
 var tuples = [
     [1, 'name', true],
     [1, 'name', true],
@@ -77,4 +74,72 @@ var tuples = [
     [1, 'name', true],
 ];
 var ci = 1;
-var children = node.children();
+// let children  = node.children() // 因为是声明的运行环境变量接口，所以可能运行时报错，因为没有这个方法
+// 14. 函数
+// 命名函数
+function greet(name) {
+    if (name) {
+        return 'hi! ' + name;
+    }
+    else {
+        return 'hi';
+    }
+}
+console.log(greet());
+console.log(greet('czhui'));
+// 匿名函数
+var greet2 = function (name) {
+    if (name) {
+        return 'hi! ' + name;
+    }
+    else {
+        return 'hi';
+    }
+};
+// 箭头函数
+var greet3 = function (name) {
+    if (name) {
+        return 'hi! ' + name;
+    }
+    else {
+        return 'hi';
+    }
+};
+// 15. 类
+var Character = /** @class */ (function () {
+    function Character(firstname, lastname) {
+        this.fullname = firstname + lastname;
+    }
+    Character.prototype.greet = function (name) {
+        if (name) {
+            return "Hi! " + name + " ! My name is " + this.fullname;
+        }
+        else {
+            return "Hi! My name is " + this.fullname;
+        }
+    };
+    return Character;
+}());
+var spark = new Character("Jacob", "Keyes");
+var msg = spark.greet();
+var msg1 = spark.greet("Dr. Halsey");
+var Logger = /** @class */ (function () {
+    function Logger() {
+    }
+    Logger.prototype.log = function (arg) {
+        console.log(arg);
+    };
+    return Logger;
+}());
+var user = {
+    name: 'czhui',
+    password: '123456'
+};
+// 17. 命名空间namespace
+var Geometry;
+(function (Geometry) {
+    Geometry.i = 1;
+    Geometry.a = "hello world";
+})(Geometry || (Geometry = {}));
+console.log(Geometry.a);
+console.log(Geometry.i);
